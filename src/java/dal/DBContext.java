@@ -10,7 +10,7 @@ public class DBContext {
 
     public DBContext() {
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=RamenHut";
+            String url = "jdbc:sqlserver://MADELINE\\SQLEXPRESS02:1433;databaseName=LecturerFeedbackDB2";
             String username = "sa";
             String password = "";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
