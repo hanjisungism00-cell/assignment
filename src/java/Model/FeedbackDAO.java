@@ -4,15 +4,16 @@ import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FeedbackDAO extends DBContext {
     PreparedStatement stm;
     ResultSet rs;
    
-    public ArrayList<Feedback> getFeedback() {
-        ArrayList<Feedback> data = new ArrayList<Feedback>();
+    public List<Feedback> getFeedback() {
+        List<Feedback> data = new ArrayList<>();
         try {
-            String strSQL = "select * from Feedback";
+            String strSQL = "select * from Feedback f join Class_Subject_Lecturer c on f.csl_id = c.id ";
             stm = connection.prepareStatement(strSQL);
             rs = stm.executeQuery();
             while (rs.next()) {
@@ -20,7 +21,7 @@ public class FeedbackDAO extends DBContext {
                 String className = rs.getString("class_name");
                 String subject = rs.getString("subject");
                 String studentMail = rs.getString("student_mail");
-                int puctuality = rs.getInt("punctuality");
+                int punctuality = rs.getInt("punctuality");
                 int skills = rs.getInt("skills");
                 int quality = rs.getInt("quality");
                 int support = rs.getInt("support");
@@ -28,7 +29,7 @@ public class FeedbackDAO extends DBContext {
                 int satisfaction = rs.getInt("satisfaction");
                 String comment = rs.getString("comment");
                 
-                Feedback f = new Feedback(id, className, subject, studentMail, puctuality, skills, quality, support, response, satisfaction, comment);
+                Feedback f = new Feedback(id, className, subject, studentMail, punctuality, skills, quality, support, response, satisfaction, comment);
                 data.add(f);
             }
 
